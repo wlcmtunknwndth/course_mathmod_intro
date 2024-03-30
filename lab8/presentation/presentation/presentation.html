@@ -1,0 +1,186 @@
+<h1 id="информация">Информация</h1>
+<h2 id="докладчик">Докладчик</h2>
+<div class="columns" data-align="center">
+<div class="column" style="width:70%;">
+<ul>
+<li>Петров Артем Евгеньевич</li>
+<li>Студент</li>
+<li>Российский университет дружбы народов</li>
+<li><a href="mailto:1032219251@rudn.ru">1032219251@rudn.ru</a></li>
+<li><a href="https://github.com/wlcmtunknwndth"
+class="uri">https://github.com/wlcmtunknwndth</a></li>
+</ul>
+</div><div class="column" style="width:30%;">
+
+</div>
+</div>
+<h1 id="задание">Задание</h1>
+<figure id="fig:001">
+<img src="image/1.jpg" style="width:70.0%" alt="Задание ч.1" />
+<figcaption aria-hidden="true">Задание ч.1</figcaption>
+</figure>
+<figure id="fig:002">
+<img src="image/2.jpg" style="width:70.0%" alt="Задание ч.2" />
+<figcaption aria-hidden="true">Задание ч.2</figcaption>
+</figure>
+<h1 id="теоретическое-введениерис.-1">Теоретическое введение(рис.
+1)</h1>
+<figure id="fig:003">
+<img src="image/3.jpg" style="width:70.0%"
+alt="Теоретическое введение ч.1" />
+<figcaption aria-hidden="true">Теоретическое введение ч.1</figcaption>
+</figure>
+<figure id="fig:004">
+<img src="image/4.jpg" style="width:70.0%"
+alt="Теоретическое введение ч.2" />
+<figcaption aria-hidden="true">Теоретическое введение ч.2</figcaption>
+</figure>
+<figure id="fig:005">
+<img src="image/3.jpg" style="width:70.0%"
+alt="Теоретическое введение ч.3" />
+<figcaption aria-hidden="true">Теоретическое введение ч.3</figcaption>
+</figure>
+<figure id="fig:006">
+<img src="image/4.jpg" style="width:70.0%"
+alt="Теоретическое введение ч.4" />
+<figcaption aria-hidden="true">Теоретическое введение ч.4</figcaption>
+</figure>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<h2 id="подключение-необходимых-библиотек">1. Подключение необходимых
+библиотек</h2>
+<p>Подключим необходимые библиотеки:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DifferentialEquations</span></span></code></pre></div>
+<h2 id="выполнение-лабораторной-для-случая-1.">2. Выполнение
+лабораторной для случая 1.</h2>
+<h3 id="код-программы">Код программы:</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="op">=</span> <span class="fl">7.1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="fl">8.1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_cr <span class="op">=</span> <span class="fl">44</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="fl">77</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tau1 <span class="op">=</span> <span class="fl">26</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>tau2<span class="op">=</span><span class="fl">21</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p1<span class="op">=</span> <span class="fl">11</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="fl">8.7</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> p_cr <span class="op">/</span> (tau1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> p_cr <span class="op">/</span> (tau2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> p_cr <span class="op">/</span> (tau1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> tau2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> (p_cr <span class="op">-</span> p1) <span class="op">/</span> (tau1 <span class="op">*</span> p1)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>c2 <span class="op">=</span> (p_cr <span class="op">-</span> p2) <span class="op">/</span> (tau2 <span class="op">*</span> p2)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ode</span>(du, u, p, t)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">1</span>] <span class="op">=</span> u[<span class="fl">1</span>] <span class="op">-</span> b<span class="op">/</span>c1<span class="op">*</span>u[<span class="fl">1</span>] <span class="op">*</span> u[<span class="fl">2</span>] <span class="op">-</span> a1<span class="op">/</span>c1<span class="op">*</span>u[<span class="fl">1</span>]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">2</span>] <span class="op">=</span> c2<span class="op">/</span>c1<span class="op">*</span>u[<span class="fl">2</span>] <span class="op">-</span> b <span class="op">/</span> c1 <span class="op">*</span> u[<span class="fl">1</span>] <span class="op">*</span> u[<span class="fl">2</span>] <span class="op">-</span> a2 <span class="op">/</span> c1<span class="op">*</span>u[<span class="fl">2</span>]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>t_arr <span class="op">=</span> (<span class="fl">0</span>, <span class="fl">50</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="fu">ODEProblem</span>(ode, [M1, M2], t_arr)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> <span class="fu">solve</span>(prob, dtmax <span class="op">=</span> <span class="fl">0.05</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ans1 <span class="op">=</span> [u[<span class="fl">1</span>] for u <span class="kw">in</span> sol.u]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ans2 <span class="op">=</span> [u[<span class="fl">2</span>] for u <span class="kw">in</span> sol.u]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> [t for t <span class="kw">in</span> sol.t]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>plt <span class="op">=</span> <span class="fu">plot</span>(</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    dpi <span class="op">=</span> <span class="fl">500</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    legend <span class="op">=</span> <span class="cn">true</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    xlabel <span class="op">=</span> <span class="st">&quot;безразмерное время&quot;</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    ylabel <span class="op">=</span> <span class="st">&quot;объем продаж&quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    plt, </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    t,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    ans1,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">&quot;оборотные средства фирмы 1&quot;</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="op">:</span>red</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    plt,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    t,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    ans2,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">&quot;оборотные средства фирмы 2&quot;</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="op">:</span>blue</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">savefig</span>(plt, <span class="st">&quot;./lab8/image/lab8_1.png&quot;</span>)</span></code></pre></div>
+<h3 id="график-для-случая-1.">График для случая 1.</h3>
+<p>В итоге, получим вот такой график(рис. 1):</p>
+<figure id="fig:007">
+<img src="image/lab8_1.png" style="width:70.0%"
+alt="График для случая 1." />
+<figcaption aria-hidden="true">График для случая 1.</figcaption>
+</figure>
+<h2 id="выполнение-лабораторной-для-случая-2.">3. Выполнение
+лабораторной для случая 2.</h2>
+<h3 id="код-программы-1">Код программы:</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="op">=</span> <span class="fl">7.1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>M2 <span class="op">=</span> <span class="fl">8.1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p_cr <span class="op">=</span> <span class="fl">44</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="fl">77</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tau1 <span class="op">=</span> <span class="fl">26</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>tau2<span class="op">=</span><span class="fl">21</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p1<span class="op">=</span> <span class="fl">11</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="fl">8.7</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> p_cr <span class="op">/</span> (tau1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> p_cr <span class="op">/</span> (tau2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> p_cr <span class="op">/</span> (tau1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> tau2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p1<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> p2<span class="op">^</span><span class="fl">2</span> <span class="op">*</span> N <span class="op">*</span> q)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> (p_cr <span class="op">-</span> p1) <span class="op">/</span> (tau1 <span class="op">*</span> p1)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>c2 <span class="op">=</span> (p_cr <span class="op">-</span> p2) <span class="op">/</span> (tau2 <span class="op">*</span> p2)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ode</span>(du, u, p, t)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">1</span>] <span class="op">=</span> u[<span class="fl">1</span>] <span class="op">-</span> (b<span class="op">/</span>c1<span class="op">+</span><span class="fl">0.0013</span>)<span class="op">*</span>u[<span class="fl">1</span>] <span class="op">*</span> u[<span class="fl">2</span>] <span class="op">-</span> a1<span class="op">/</span>c1<span class="op">*</span>u[<span class="fl">1</span>]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    du[<span class="fl">2</span>] <span class="op">=</span> c2<span class="op">/</span>c1<span class="op">*</span>u[<span class="fl">2</span>] <span class="op">-</span> b <span class="op">/</span> c1 <span class="op">*</span> u[<span class="fl">1</span>] <span class="op">*</span> u[<span class="fl">2</span>] <span class="op">-</span> a2 <span class="op">/</span> c1<span class="op">*</span>u[<span class="fl">2</span>]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>t_arr <span class="op">=</span> (<span class="fl">0</span>, <span class="fl">3</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="fu">ODEProblem</span>(ode, [M1, M2], t_arr)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> <span class="fu">solve</span>(prob, dtmax <span class="op">=</span> <span class="fl">0.01</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ans1 <span class="op">=</span> [u[<span class="fl">1</span>] for u <span class="kw">in</span> sol.u]</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>ans2 <span class="op">=</span> [u[<span class="fl">2</span>] for u <span class="kw">in</span> sol.u]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> [t for t <span class="kw">in</span> sol.t]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>plt <span class="op">=</span> <span class="fu">plot</span>(</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    dpi <span class="op">=</span> <span class="fl">500</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    legend <span class="op">=</span> <span class="cn">true</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    xlabel <span class="op">=</span> <span class="st">&quot;безразмерное время&quot;</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    ylabel <span class="op">=</span> <span class="st">&quot;объем продаж&quot;</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    plt, </span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    t,</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    ans1,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">&quot;оборотные средства фирмы 1&quot;</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="op">:</span>red</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot!</span>(</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    plt,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    t,</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    ans2,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">&quot;оборотные средства фирмы 2&quot;</span>,</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> <span class="op">:</span>blue</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="fu">savefig</span>(plt, <span class="st">&quot;./lab8/image/lab8_2.png&quot;</span>)</span></code></pre></div>
+<h3 id="график-для-случая-2.">График для случая 2.</h3>
+<p>В итоге, получим вот такой график(рис. 2):</p>
+<figure id="fig:008">
+<img src="image/lab8_2.png" style="width:70.0%"
+alt="График для случая 2." />
+<figcaption aria-hidden="true">График для случая 2.</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<p>В этой лабораторной работе мы изучили задачу об эффективности рекламы
+и подкрепили свои знания языка Julia и его библиотек.</p>
